@@ -1,0 +1,24 @@
+@import 'nav.scss';
+@import 'post.scss';
+
+* {
+  box-sizing: border-box;
+}
+
+body{
+  margin: 0;
+  padding: 0px;
+  border: 1px solid red;
+}
+
+.wrapper {
+  margin: 0 auto;
+  width: 70%;
+  border: 1px solid red;
+}
+
+.App-header{
+  margin: 0 auto;
+  border: 1px solid red;
+}
+

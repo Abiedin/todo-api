@@ -1,0 +1,74 @@
+.todo-conteiner{
+  max-width: 90%;
+  margin: 30px auto 0 auto;
+}
+
+.todo-title {
+  text-align: center;
+  color: rgb(10, 163, 168);
+  margin-bottom: 10px;
+}
+
+.todo-ul{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
+  padding: 10px;
+}
+
+.todo-li {
+  position: relative;
+  list-style: none;
+  width: 100%;
+  box-shadow: 2px 2px 5px 2px rgb(195, 206, 207);
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 20px;
+  margin-bottom: 10px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  color:rgb(43, 97, 104);
+  cursor: pointer;
+}
+
+.done {
+  text-decoration: line-through;
+}
+
+.todo-pen-img {
+  position: absolute;
+  right: 45px;
+  top: 14px;
+  width: 17px;
+  height: 17px;
+  cursor: pointer;
+}
+
+.todo-dell-img {
+  position: absolute;
+  right: 5px;
+  top: 10px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.todo-info {
+  display: flex;
+  justify-content: space-between;
+  border: 2px solid rgb(121, 89, 89);
+  padding: 10px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.btn-clear {
+  outline: none;
+  background-color: #fff;
+  border: 2px solid rgb(11, 133, 182);
+  font-size: 18px;
+  border-radius: 5px;
+  width: 200px;
+  padding: 3px;
+  cursor: pointer;
+}

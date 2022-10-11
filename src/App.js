@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+import { Navigation } from './action/Navigation';
+import { PostList } from './action/PostList';
+import { TodoList } from './action/TodoList';
+import { UserList } from './action/UserList';
+
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <BrowserRouter>
+      <div className='wrapper'>
+        <Navigation />
+          <Routes>
+            <Route path='/' element={<PostList />} />
+            <Route path='todo' element={<TodoList />} />
+            <Route path='userlist' element={<UserList />} />
+          </Routes>
+      </div>
+    </BrowserRouter>
+  )
 }
 
 export default App;
