@@ -27,8 +27,8 @@ const TodoItem = ({todo}) => {
       ) : (
         <li   className={todo.done ? "todo-li done" : "todo-li"}  key={todo.id} >
           {todo.text}
-          <img   src="./pen.png"    alert="pen"   className="todo-pen-img"  onClick={() =>  dispatch(toggleCompletedTodo(todo.id))} />
-          <img   src="./delete.png"  alert="delete"  className="todo-dell-img"  onClick={(e) => {dispatch(removeTodo(todo.id))}}/>
+          <img   src="./img/pen.png"    alert="pen"   className="todo-pen-img"  onClick={() =>  dispatch(toggleCompletedTodo(todo.id))} />
+          <img   src="./img/delete.png"  alert="delete"  className="todo-dell-img"  onClick={(e) => {dispatch(removeTodo(todo.id))}}/>
         </li>
       )}
     </>    
