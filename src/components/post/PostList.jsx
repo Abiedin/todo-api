@@ -1,4 +1,3 @@
-//import { useSelector } from 'react-redux';
 import TextField from "./TextField";
 import './post.scss'
 import { useState } from "react";
