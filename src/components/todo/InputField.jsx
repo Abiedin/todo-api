@@ -1,7 +1,7 @@
-import "../scss/todo-form.scss";
+import "./todo-form.scss";
 import React from "react";
 import { useDispatch } from "react-redux";
-import {addTodo} from "../slices/todoSlice";
+import {addTodo} from "../../slices/todoSlice";
 
 const InputField = () => {
   const dispatch = useDispatch();

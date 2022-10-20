@@ -1,10 +1,8 @@
 import { useDispatch } from "react-redux";
 import React from "react";
-import { toggleCompletedTodo } from "../slices/todoSlice";
-import { removeTodo } from "../slices/todoSlice";
-import { setChangeTodo, setChangeValue } from "../slices/todoSlice";
+import { setChangeTodo, setChangeValue, toggleCompletedTodo, removeTodo } from "../../slices/todoSlice";
 
-import "../scss/todo.scss";
+import "./todo.scss";
 
 const TodoItem = ({todo}) => {
   const dispatch = useDispatch();

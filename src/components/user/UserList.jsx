@@ -1,11 +1,10 @@
-import '../scss/userlist.scss'
+import './userlist.scss'
 
 export const UserList = () => {
   return (
     <>
       <h1 className="userlist-title">UserList</h1>
       <div className="userlist">
-        
         <ul>
           <li>Hanna</li>
           <li>Manna</li>

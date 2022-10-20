@@ -1,8 +1,7 @@
 import React from "react";
 import { useState } from "react";
-import "../scss/form-postlist.scss";
+import "./form-postlist.scss";
 import { useDispatch } from "react-redux";
-//mport { postAdd } from "../slice/postSlice";
 
 
 const TextField = (props) => {

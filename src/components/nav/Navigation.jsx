@@ -1,4 +1,5 @@
-import { NavLink } from "react-router-dom"
+import { NavLink } from "react-router-dom";
+import './nav.scss';
 
 export const Navigation = () => {
   const NavLinkStyles = ({ isActive }) => {

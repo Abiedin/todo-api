@@ -2,9 +2,9 @@ import React from "react";
 import { useSelector } from "react-redux"; // хук, для того чтобы достать массив todos
 import TodoItem   from "./TodoItem";
 import InputField  from "./InputField"
-import "../scss/todo.scss";
+import "./todo.scss";
 import { useDispatch } from "react-redux"; 
-import { allRemove } from "../slices/todoSlice";
+import { allRemove } from "../../slices/todoSlice";
 
  const TodoList = () => {
   const todos = useSelector(state => state.todo.todos);

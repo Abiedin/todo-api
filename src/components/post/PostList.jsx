@@ -1,6 +1,6 @@
 //import { useSelector } from 'react-redux';
 import TextField from "./TextField";
-import '../scss/post.scss'
+import './post.scss'
 import { useState } from "react";
 
 export const PostList = () => {
