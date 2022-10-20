@@ -1,17 +1,17 @@
 //import { useSelector } from 'react-redux';
-import FormPostList from "../components/FormPostList";
+import TextField from "./TextField";
 import '../scss/post.scss'
 import { useState } from "react";
 
 export const PostList = () => {
   const [arrpost, setPosts] = useState([]);
-  //const [allTodos, setAllTodos] = useState(0);
- // const [allComplete, setAllComplete] = useState(0)
-
 
   const putPost = (value) => {
     if(value) {
-      setPosts([...arrpost, {id: Date.now(), text: value}])
+      setPosts([...arrpost, {
+        id: Date.now(), 
+        text: value
+      }])
     } else {
       alert('Введите текстaaa')
     }
@@ -24,7 +24,7 @@ export const PostList = () => {
   return (
     <div className="post-conteiner">
       <h1 className="post-title">PostList</h1>
-        <FormPostList 
+        <TextField 
           putPost={putPost}
         />
         <ul className="post-ul">
@@ -41,7 +41,6 @@ export const PostList = () => {
         <div className="postbtncl">
           <button className="btn-clear" onClick={clearAllPosts} > Clear All</button>  
         </div>
-        
     </div>
   )
 }

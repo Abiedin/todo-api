@@ -35,6 +35,28 @@
   text-decoration: line-through;
 }
 
+.todo-change {
+  width: 80%;
+  outline: none;
+  border: 2px solid rgb(68, 222, 233);
+  padding: 5px;
+  font-size: 18px;
+  border-radius: 2px;
+  margin: 0;
+}
+
+.btn-change-save {
+  outline: none;
+  background-color: #fff;
+  border: 2px solid rgb(68, 222, 233);
+  font-size: 16px;
+  border-radius: 3px;
+  width: 150px;
+  padding: 3px;
+  margin: 15px 0;
+  cursor: pointer;
+}
+
 .todo-pen-img {
   position: absolute;
   right: 45px;

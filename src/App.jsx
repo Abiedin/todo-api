@@ -1,10 +1,8 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-
-import { Navigation } from './action/Navigation';
-import { PostList } from './action/PostList';
-import { TodoList } from './action/TodoList';
-import { UserList } from './action/UserList';
-
+import { Navigation } from './components/Navigation';
+import { PostList } from './components/PostList';
+import  TodoList  from './components/TodoList';
+import { UserList } from './components/UserList';
 
 function App() {
 
