@@ -1,31 +1,36 @@
-import React from "react";
-import { useSelector } from "react-redux"; // хук, для того чтобы достать массив todos
-import TodoItem   from "./TodoItem";
-import InputField  from "./InputField"
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import TodoItem from "./TodoItem";
+import { InputField } from "./InputField";
+import Buttons from "../../modal/Buttons";
 import "./todo.scss";
-import { useDispatch } from "react-redux"; 
-import { allRemove } from "../../slices/todoSlice";
+import Modal from "../../modal/Modal";
+import { allRemove, getAll } from "../../slices/todoSlice";
 
- const TodoList = () => {
-  const todos = useSelector(state => state.todo.todos);
-  const dispatch = useDispatch();
+const TodoList = () => {
+  const todos = useSelector((state) => state.todo.todos);
+  const [modalActive, setModalActive] = useState(false);
 
   return (
     <div className="todo-conteiner">
       <h1 className="todo-title">TodoList</h1>
       <InputField />
+      <div className="todo-info">
+        <span>All todos: {todos.length}</span>
+      </div>
+      <Buttons getAll={getAll} allRemove={allRemove} />
+      <Modal active={modalActive} setActive={setModalActive} />
+
       <ul className="todo-ul">
-        {todos?.map((todo) => (
-          <TodoItem 
-            todo={todo}              
-          />
-        ))}
-        <div className="todo-info">
-          <span>All todos: {todos.length}</span>
-        </div>
-        <button className="btn-clear" onClick={() => dispatch(allRemove())}>
-          Clear All
-        </button>
+        {todos
+          ?.map((todo) => (
+            <TodoItem
+              key={todo.title}
+              todo={todo}
+              setModalActive={setModalActive}
+            />
+          ))
+          .reverse()}
       </ul>
     </div>
   );

@@ -1,19 +1,24 @@
 import "./todo-form.scss";
 import React from "react";
-import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addNewTodo } from "../../slices/todoSlice";
+import { addNewTodo, getTodos } from "../../slices/todoSlice";
 import Input from "./Input";
 
 export const InputField = () => {
   const dispatch = useDispatch();
-  const [todoValue, setTodoValue] = useState("");
+  const [todoValue, setTodoValue] = React.useState("");
 
   const addTodoHandler = () => {
     if (todoValue.length) {
+      console.log("todoValue =", todoValue);
+      setTodoValue("");
       dispatch(addNewTodo(todoValue));
     }
   };
+
+  /* React.useEffect(() => {
+    dispatch(getTodos());
+  }, [dispatch]);*/
 
   return (
     <form

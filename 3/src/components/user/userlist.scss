@@ -1,7 +1,7 @@
 .userlist {
   display: flex;
-  flex-direction: column;
-  border: 1px solid red;
+  justify-content: center;
+  align-items: center;
 
   & li {
     width: auto;
@@ -12,15 +12,7 @@
   }
 }
 
-.userlist-item {
-   display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid red;
-}
-
 .userlist-title {
-  border: 1px solid red;
   text-align: center;
   color: rgb(10, 163, 168);
   margin-bottom: 10px;

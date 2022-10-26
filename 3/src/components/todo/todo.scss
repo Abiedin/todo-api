@@ -17,13 +17,8 @@
   padding: 10px;
 }
 
-.textli {
-  max-width: 90%;
-}
-
 .todo-li {
-  display: flex;
-  justify-content: space-between;
+  position: relative;
   list-style: none;
   width: 100%;
   box-shadow: 2px 2px 5px 2px rgb(195, 206, 207);
@@ -63,13 +58,18 @@
 }
 
 .todo-pen-img {
-  margin-right: 15px;
+  position: absolute;
+  right: 45px;
+  top: 14px;
   width: 17px;
   height: 17px;
   cursor: pointer;
 }
 
 .todo-dell-img {
+  position: absolute;
+  right: 5px;
+  top: 10px;
   width: 20px;
   height: 20px;
   cursor: pointer;
@@ -83,8 +83,28 @@
   margin-bottom: 10px;
 }
 
+.btn-clear {
+  outline: none;
+  background-color: #fff;
+  border: 2px solid rgb(11, 133, 182);
+  font-size: 18px;
+  border-radius: 5px;
+  width: 200px;
+  padding: 3px;
+  cursor: pointer;
+}
 
-
+.btn-gettodo {
+  outline: none;
+  background-color: rgb(195, 231, 195);
+  border: 2px solid rgb(69, 160, 84);
+  font-size: 18px;
+  border-radius: 5px;
+  width: 200px;
+  padding: 3px;
+  color: rgb(102, 168, 41);
+  cursor: pointer;
+}
 
 .todobtncl {
   display: flex;

@@ -1,19 +1,18 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import "./form-postlist.scss";
 import { useDispatch } from "react-redux";
+import { addNewPost } from "../../slices/postSlice";
 
-
-const TextField = (props) => {
-  const dispatch = useDispatch(); 
-  const [value, setValuePost] = useState(""); 
+const TextField = () => {
+  const dispatch = useDispatch();
+  const [postValue, setPostValue] = useState("");
 
   return (
-    <form className="form-post">
+    <form>
       <textarea
         type="text"
-        value={value}
-        onChange={(e) => setValuePost(e.target.value)}
+        value={postValue}
+        onChange={(e) => setPostValue(e.target.value)}
         placeholder="Input posts"
         className="textarea-input"
       />
@@ -21,8 +20,7 @@ const TextField = (props) => {
         className="textarea-btn"
         onClick={(e) => {
           e.preventDefault();
-          props.putPost(value);
-          setValuePost("");
+          dispatch(addNewPost(postValue))
         }}
       >
         Add post

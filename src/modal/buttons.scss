@@ -1,0 +1,27 @@
+.todobtncl {
+  margin: 40px 0 0 0;
+  text-align: center;
+}
+
+.btn-gettodo {
+  outline: none;
+  background-color: rgb(195, 231, 195);
+  border: 2px solid rgb(69, 160, 84);
+  font-size: 18px;
+  border-radius: 5px;
+  width: 200px;
+  padding: 3px;
+  color: rgb(102, 168, 41);
+  cursor: pointer;
+}
+
+.btn-clear {
+  outline: none;
+  background-color: #fff;
+  border: 2px solid rgb(11, 133, 182);
+  font-size: 18px;
+  border-radius: 5px;
+  width: 200px;
+  padding: 3px;
+  cursor: pointer;
+}

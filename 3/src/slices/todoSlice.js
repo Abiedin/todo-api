@@ -1,9 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { v4 } from 'uuid';
 
-export const getAll = createAsyncThunk(
-  "todos/getAll",
+export const getTodos = createAsyncThunk(
+  "todos/getTodos",
   async (_, { rejectWithValue }) => {
     try {
       const responseTodo = await axios.get(
@@ -13,7 +12,7 @@ export const getAll = createAsyncThunk(
       if (!responseTodo) {
         throw new Error("Can/t delete post. Server error.");
       }
-      
+      console.log(responseTodo);
       return responseTodo.data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -72,12 +71,14 @@ export const addNewTodo = createAsyncThunk(
   "todos/addNewTodo",
   async (text, { rejectWithValue, dispatch }) => {
     try {
-      const newTodo = {
-        id: v4(),
+      const newPost = {
         title: text,
         userId: 1,
         completed: false,
       };
+
+      console.log('newPost =', newPost)
+      console.log('text =', text)
 
       const response = await axios.post(
         "https://jsonplaceholder.typicode.com/posts",
@@ -85,14 +86,14 @@ export const addNewTodo = createAsyncThunk(
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({newTodo}),
+          body: JSON.stringify(newPost),
         }
       );
-      dispatch(addTodo(newTodo));
-      if (!response.ok) {
+
+      if (!response) {
         throw new Error("Can/t add post. Server error.");
       }
-     
+      
       const data = await response.json();
       console.log('data =', data)
       dispatch(addTodo(data));
@@ -113,30 +114,25 @@ const todoSlice = createSlice({
   name: "todos",
   initialState: {
     todos: [],
-    chtodoTitle: '',
-    chtodoId: 0,
-    inputNull: true,
     status: null,
     error: null,
   },
   reducers: {
-    sendId: (state, action) => {
-      state.chtodoId = action.payload;
-      const rTodo = state.todos.find((todo) => todo.id === action.payload)
-      if (rTodo) {
-        state.chtodoTitle = rTodo.title;
-      }
-    },
     setChangeTodo: (state, action) => {
-      const gTodo = state.todos.find((todo) => todo.id === state.chtodoId);
-      if (gTodo) {
-        gTodo.title = state.chtodoTitle;
+      const toggleTodo = state.todos.find((todo) => todo.id === action.payload);
+      if (toggleTodo) {
+        toggleTodo.completed = !toggleTodo.completed;
       }
     },
     setChangeValue: (state, action) => {
-      state.chtodoTitle = action.payload      
+      state.todos.forEach((todo) => {
+        if (todo.id === action.payload.id) {
+          todo.text = action.payload.value;
+        }
+      });
     },
     addTodo: (state, action) => {
+      alert("rrrrrrr")
       state.todos.push(action.payload)
     },
     toggleCompletedTodo: (state, action) => {
@@ -153,32 +149,32 @@ const todoSlice = createSlice({
     },
   },
   extraReducers: {
-    [getAll.pending]: (state) => {
+    [getTodos.pending]: (state) => {
       console.log("pending");
       state.status = "loading";
       state.error = null;
     },
-    [getAll.fulfilled]: (state, action) => {
+    [getTodos.fulfilled]: (state, action) => {
       console.log("fulfilled");
       state.status = "fulfilled";
       state.todos = action.payload;
     },
-    [getAll.rejected]: setError,
+    [getTodos.rejected]: setError,
 
 
-    [addNewTodo.pending]: () => {
-      console.log("addNewTodo: pending");
+    [addNewTodo.pending]: (state) => {
+      console.log("pending");
+      state.status = "loading";
+      state.error = null;
     },
-    [addNewTodo.fulfilled]: (state, action) => {
-      console.log("addNewTodo: fulfilled");
-      state.status = "fulfilled";
-      state.todos = action.payload;
+    [addNewTodo.pending]: (state) => {
+      console.log("pending");
+      state.status = "loading";
+      state.error = null;
     },
-    [addNewTodo.rejected]:(state, action) => {
-      console.log("addNewTodo: rejected");
-      state.status = "rejected";
-      state.error = action.payload;
-    },
+  
+    [addNewTodo.rejected]: setError,
+
     [completedTodo.rejected]: setError,
 
     [removeTodoApi.rejected]: setError,
@@ -192,7 +188,6 @@ export const {
   setChangeTodo,
   setChangeValue,
   allRemove,
-  sendId,
 } = todoSlice.actions;
 
 export default todoSlice.reducer;

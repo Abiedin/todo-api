@@ -1,45 +1,22 @@
+import "./post.scss";
+import { useSelector } from "react-redux";
+import PostItem from "./PostItem";
 import TextField from "./TextField";
-import './post.scss'
-import { useState } from "react";
+import Buttons from "../../modal/Buttons";
+import { allRemove, getAll } from "../../slices/postSlice";
 
 export const PostList = () => {
-  const [arrpost, setPosts] = useState([]);
-
-  const putPost = (value) => {
-    if(value) {
-      setPosts([...arrpost, {
-        id: Date.now(), 
-        text: value
-      }])
-    } else {
-      alert('Введите текстaaa')
-    }
-  }
-
-  const clearAllPosts = () => {
-    setPosts([]);
-  }
+  const arrpo = useSelector((state) => state.postStore.postsArr);
 
   return (
     <div className="post-conteiner">
       <h1 className="post-title">PostList</h1>
-        <TextField 
-          putPost={putPost}
-        />
-        <ul className="post-ul">
-          {
-            arrpost.map((todo) => {
-              return (
-                <li className="post-text">
-                  {todo.text}
-                </li>
-              )
-            })
-          }
-        </ul>
-        <div className="postbtncl">
-          <button className="btn-clear" onClick={clearAllPosts} > Clear All</button>  
-        </div>
+      <TextField />
+      <Buttons getAll={getAll} allRemove={allRemove} />
+
+      <div className="post-Items">
+        {arrpo?.map((post) => <PostItem key={post.id} post={post} />).reverse()}
+      </div>
     </div>
-  )
-}
+  );
+};

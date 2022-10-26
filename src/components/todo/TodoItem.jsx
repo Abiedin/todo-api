@@ -1,37 +1,52 @@
 import { useDispatch } from "react-redux";
 import React from "react";
-import { setChangeTodo, setChangeValue, toggleCompletedTodo, removeTodo } from "../../slices/todoSlice";
+
+import {
+  completedTodo,
+  removeTodoApi,
+  sendId,
+} from "../../slices/todoSlice";
 
 import "./todo.scss";
 
-const TodoItem = ({todo}) => {
+const TodoItem = ({ todo, setModalActive }) => {
   const dispatch = useDispatch();
 
   return (
     <>
-      {todo.completed ? (
-        <>
-          <input
-            type="text"
-            value={todo.text}
-            onChange={(e) => dispatch(setChangeValue({value : e.target.value, id : todo.id}))}
-            className="todo-change"
-          />
-          <button
-            className="btn-change-save"
-            onClick={() => {dispatch( setChangeTodo(todo.id))}}
+      {
+        <li
+          className={todo.completed ? "todo-li done" : "todo-li"}
+          key={todo.id}
+        >
+          <div
+            className="textli"
+            onClick={() => dispatch(completedTodo(todo.id))}
           >
-            Save change
-          </button>
-        </>
-      ) : (
-        <li   className={todo.done ? "todo-li done" : "todo-li"}  key={todo.id} >
-          {todo.text}
-          <img   src="./img/pen.png"    alert="pen"   className="todo-pen-img"  onClick={() =>  dispatch(toggleCompletedTodo(todo.id))} />
-          <img   src="./img/delete.png"  alert="delete"  className="todo-dell-img"  onClick={(e) => {dispatch(removeTodo(todo.id))}}/>
+            {todo.title}
+          </div>
+          <div className="changetodo">
+            <img
+              src="./img/pen.png"
+              alert="pen"
+              className="todo-pen-img"
+              onClick={() => {
+                setModalActive(true);
+                dispatch(sendId(todo.id));
+              }}
+            />
+            <img
+              src="./img/delete.png"
+              alert="delete"
+              className="todo-dell-img"
+              onClick={() => {
+                dispatch(removeTodoApi(todo.id));
+              }}
+            />
+          </div>
         </li>
-      )}
-    </>    
+      }
+    </>
   );
 };
 
