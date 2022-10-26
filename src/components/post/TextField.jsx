@@ -21,6 +21,7 @@ const TextField = () => {
         onClick={(e) => {
           e.preventDefault();
           dispatch(addNewPost(postValue))
+          setPostValue("");
         }}
       >
         Add post

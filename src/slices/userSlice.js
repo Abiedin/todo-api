@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const getUsers = createAsyncThunk(
   "userN/getUsers",
-  async (_, { rejectWithValue }) => {
+  async (_, { rejectWithValue, dispatch }) => {
     try {
       const response = await axios.get(
         "https://jsonplaceholder.typicode.com/users"
@@ -13,8 +13,9 @@ export const getUsers = createAsyncThunk(
         throw new Error("Can/t get users. Server error.");
       }
       console.log(response.data);
-      return response.data;
 
+      //dispatch(alskdm(response.data))
+      return response.data;
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -35,6 +36,10 @@ const userSlice = createSlice({
     error: null,
   },
   reducers: {
+    alskdm: (state, action) => {
+      alert("0000");
+      state.userArr = action.payload;
+    },
     allRemove: (state) => {
       state.userArr = [];
     },
@@ -51,10 +56,9 @@ const userSlice = createSlice({
       state.userArr = action.payload;
     },
     [getUsers.rejected]: setError,
-  }
+  },
 });
 
-
-export const { allRemove } = userSlice.actions;
+export const { allRemove, alskdm } = userSlice.actions;
 
 export default userSlice.reducer;

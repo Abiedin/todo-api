@@ -1,11 +1,7 @@
 import { useDispatch } from "react-redux";
 import React from "react";
 
-import {
-  completedTodo,
-  removeTodoApi,
-  sendId,
-} from "../../slices/todoSlice";
+import { completedTodo, removeTodoApi, sendId } from "../../slices/todoSlice";
 
 import "./todo.scss";
 

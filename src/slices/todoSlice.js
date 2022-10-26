@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { v4 } from 'uuid';
+import { v4 } from "uuid";
 
 export const getAll = createAsyncThunk(
   "todos/getAll",
@@ -11,9 +11,9 @@ export const getAll = createAsyncThunk(
       );
 
       if (!responseTodo) {
-        throw new Error("Can/t delete post. Server error.");
+        throw new Error("Can/t get post. Server error.");
       }
-      
+
       return responseTodo.data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -57,7 +57,8 @@ export const removeTodoApi = createAsyncThunk(
   async (id, { rejectWithValue, dispatch }) => {
     try {
       const responseTodo = await axios.delete(
-        `https://jsonplaceholder.typicode.com/posts/${id}`);
+        `https://jsonplaceholder.typicode.com/posts/${id}`
+      );
       if (!responseTodo) {
         throw new Error("Can/t delete post. Server error.");
       }
@@ -85,18 +86,17 @@ export const addNewTodo = createAsyncThunk(
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({newTodo}),
+          body: JSON.stringify({ newTodo }),
         }
       );
       dispatch(addTodo(newTodo));
       if (!response.ok) {
         throw new Error("Can/t add post. Server error.");
       }
-     
+
       const data = await response.json();
-      console.log('data =', data)
+      console.log("data =", data);
       dispatch(addTodo(data));
-     
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -113,7 +113,7 @@ const todoSlice = createSlice({
   name: "todos",
   initialState: {
     todos: [],
-    chtodoTitle: '',
+    chtodoTitle: "",
     chtodoId: 0,
     inputNull: true,
     status: null,
@@ -122,7 +122,7 @@ const todoSlice = createSlice({
   reducers: {
     sendId: (state, action) => {
       state.chtodoId = action.payload;
-      const rTodo = state.todos.find((todo) => todo.id === action.payload)
+      const rTodo = state.todos.find((todo) => todo.id === action.payload);
       if (rTodo) {
         state.chtodoTitle = rTodo.title;
       }
@@ -134,10 +134,10 @@ const todoSlice = createSlice({
       }
     },
     setChangeValue: (state, action) => {
-      state.chtodoTitle = action.payload      
+      state.chtodoTitle = action.payload;
     },
     addTodo: (state, action) => {
-      state.todos.push(action.payload)
+      state.todos.push(action.payload);
     },
     toggleCompletedTodo: (state, action) => {
       const toggleTodo = state.todos.find((todo) => todo.id === action.payload);
@@ -165,7 +165,6 @@ const todoSlice = createSlice({
     },
     [getAll.rejected]: setError,
 
-
     [addNewTodo.pending]: () => {
       console.log("addNewTodo: pending");
     },
@@ -174,7 +173,7 @@ const todoSlice = createSlice({
       state.status = "fulfilled";
       state.todos = action.payload;
     },
-    [addNewTodo.rejected]:(state, action) => {
+    [addNewTodo.rejected]: (state, action) => {
       console.log("addNewTodo: rejected");
       state.status = "rejected";
       state.error = action.payload;
