@@ -45,32 +45,36 @@ export const addNewPost = createAsyncThunk(
   "postN/addNewPost",
   async (text, { rejectWithValue, dispatch }) => {
     try {
-      const newTodo = {
-        id: v4(),
-        title: text,
-        userId: 1,
-        body: "Loream ipson",
-      };
-      console.log("text =", text);
-      console.log("newTodo =", newTodo);
-      dispatch(adddPost(newTodo));
+      if (text.length > 0){
+        const newTodo = {
+          id: v4(),
+          title: text,
+          userId: 1,
+          body: "Loream ipson",
+        };
+      
+      
+        console.log("text =", text);
+        console.log("newTodo =", newTodo);
+        dispatch(adddPost(newTodo));
 
-      const response = await axios.post(
-        "https://jsonplaceholder.typicode.com/posts",
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(newTodo),
+        const response = await axios.post(
+          "https://jsonplaceholder.typicode.com/posts",
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(newTodo),
+          }
+        );
+        if (!response) {
+          throw new Error("Can/t add post. Server error.");
         }
-      );
-      if (!response) {
-        throw new Error("Can/t add post. Server error.");
-      }
 
-      /*const data = await response.json();
-      console.log("data =", data);
-      dispatch(adddPost(data));*/
+        /*const data = await response.json();
+        console.log("data =", data);
+        dispatch(adddPost(data));*/
+      }
     } catch (error) {
       return rejectWithValue(error.message);
     }

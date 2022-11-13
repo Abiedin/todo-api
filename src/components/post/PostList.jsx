@@ -1,9 +1,9 @@
-import "./post.scss";
-import { useSelector } from "react-redux";
-import PostItem from "./PostItem";
-import TextField from "./TextField";
-import Buttons from "../../modal/Buttons";
-import { allRemove, getAll } from "../../slices/postSlice";
+import './post.scss';
+import { useSelector } from 'react-redux';
+import PostItem from './PostItem';
+import TextField from './TextField';
+import Buttons from '../../modal/buttons/Buttons';
+import { allRemove, getAll } from '../../slices/postSlice';
 
 export const PostList = () => {
   const arrpo = useSelector((state) => state.postStore.postsArr);

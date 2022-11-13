@@ -1,9 +1,9 @@
-import { useDispatch } from "react-redux";
-import React from "react";
+import { useDispatch } from 'react-redux';
+import React from 'react';
 
-import { completedTodo, removeTodoApi, sendId } from "../../slices/todoSlice";
+import { completedTodo, removeTodoApi, sendId } from '../../slices/todoSlice';
 
-import "./todo.scss";
+import './todo.scss';
 
 const TodoItem = ({ todo, setModalActive }) => {
   const dispatch = useDispatch();
@@ -12,7 +12,7 @@ const TodoItem = ({ todo, setModalActive }) => {
     <>
       {
         <li
-          className={todo.completed ? "todo-li done" : "todo-li"}
+          className={todo.completed ? 'todo-li done' : 'todo-li'}
           key={todo.id}
         >
           <div
@@ -25,6 +25,7 @@ const TodoItem = ({ todo, setModalActive }) => {
             <img
               src="./img/pen.png"
               alert="pen"
+              alt=""
               className="todo-pen-img"
               onClick={() => {
                 setModalActive(true);
@@ -34,6 +35,7 @@ const TodoItem = ({ todo, setModalActive }) => {
             <img
               src="./img/delete.png"
               alert="delete"
+              alt=""
               className="todo-dell-img"
               onClick={() => {
                 dispatch(removeTodoApi(todo.id));

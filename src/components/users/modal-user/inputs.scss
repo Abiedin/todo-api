@@ -1,0 +1,41 @@
+.fild {
+  display: flex;
+  flex: content;
+}
+
+
+
+.fild__itemsleft {
+  margin: 0 20px 0 0 ;
+  width: 50%;
+}
+
+.fild__itemsright {
+  margin: 0 0 0 20px;
+  width: 50%;
+}
+
+.fild-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 20px;
+    border-radius: 5px;
+    margin: 5px 0 7px 0;
+}
+
+.fild__lable {
+  opacity: 0.5;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.error {
+  margin: 0 0 9px;
+  font-size: 16px;
+  opacity: 0.9;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  color: red;
+}
+
+.fild__id-hidden {
+  display: none;
+}

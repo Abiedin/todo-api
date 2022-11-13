@@ -8,5 +8,6 @@ export const store = configureStore({
     todo: todoSlice,
     postStore: postSlice,
     userStore: userSlice,
+    userLocal: userSlice,
   },
 });
