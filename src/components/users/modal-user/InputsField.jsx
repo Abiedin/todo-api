@@ -1,6 +1,6 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import React from 'react';
-import { changeUserStorage } from '../../../slices/userSlice';
+import { changeUserStorage, stateUser } from '../../../slices/userSlice';
 import './inputs.scss';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
@@ -32,8 +32,7 @@ const InputsField = ({ id, setActive }) => {
   /*let stateLocalUser = useSelector((state) => state.userLocal.storLocalUser);
   console.log('stateLocalUser =', stateLocalUser);*/
 
-  const stateLocalUser = JSON.parse(localStorage.getItem('users')).data[id-1];
-  
+  const stateLocalUser = JSON.parse(localStorage.getItem('users')).data[id - 1];
 
   /*if (!stateLocalUser) {
     stateLocalUser = JSON.parse(localStorage.getItem('users')).data[id-1];
@@ -75,6 +74,7 @@ const InputsField = ({ id, setActive }) => {
             setSubmitting(false);
             setActive(false);
             dispatch(changeUserStorage(values));
+            dispatch(stateUser());
           }, 400);
         }}
         validationSchema={FormSchema}

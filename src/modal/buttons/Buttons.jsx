@@ -1,6 +1,5 @@
-import { useDispatch } from "react-redux";
-
-import "./buttons.scss";
+import { useDispatch } from 'react-redux';
+import './buttons.scss';
 
 const Buttons = ({ getAll, allRemove }) => {
   const dispatch = useDispatch();

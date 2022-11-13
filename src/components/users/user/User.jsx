@@ -1,16 +1,14 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import './user.scss';
 import ModalUser from '../modal-user/ModalUser';
 import InputsField from '../modal-user/InputsField';
-import { stateUser } from '../../../slices/userSlice';
 
 export const User = () => {
   const { id } = useParams();
   const goBack = useNavigate();
   const [modalActive, setModalActive] = useState(false);
-  const dispatch = useDispatch();
+
   const arr = JSON.parse(localStorage.getItem('users')).data[id - 1];
 
   const [idd, setId] = useState(id);
