@@ -1,0 +1,39 @@
+.extra-buttons {
+  display: flex;
+  flex-direction: column;
+}
+
+.extra-btn {
+  margin: 10px 0;
+  outline: none;
+  background-color: #fff;
+  border: 1px solid rgb(11, 133, 182);
+  font-size: 16px;
+  border-radius: 5px;
+  width: 75%;
+  padding: 3px;
+  cursor: pointer;
+  
+}
+
+.btn-goback {
+  margin: 10px 0;
+  outline: none;
+  background-color: #fff;
+  border: 2px solid rgb(11, 133, 182);
+  font-size: 18px;
+  border-radius: 5px;
+  width: 200px;
+  padding: 3px;
+  cursor: pointer;
+}
+
+.extra {
+  margin: 30px 0 0 0;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 20px;
+  color: rgb(68, 38, 151);
+  text-align: center;
+  border-radius: 3px;
+  border: 1px solid rgb(68, 59, 196);
+}

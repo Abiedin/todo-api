@@ -1,55 +1,38 @@
 import { useDispatch } from 'react-redux';
-import React from 'react';
+import React, { useState } from 'react';
 import { changeUserStorage, stateUser } from '../../../slices/userSlice';
 import './inputs.scss';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
-
-const FormSchema = Yup.object().shape({
-  phone: Yup.number()
-    .typeError('Must be number')
-    .min(5, 'Number must be 5 characters long')
-    .required('Required'),
-  lastName: Yup.string()
-    .typeError('Must be string')
-    .min(2, 'Password must be 2 characters long')
-    .required('Required'),
-  password: Yup.string()
-    .min(2, 'Password must be 2 characters long')
-    .matches(/[0-9]/, 'Password requires a number')
-    .required('Required'),
-  /*.matches(/[a-z]/, 'Password requires a lowercase letter')
-    .matches(/[A-Z]/, 'Password requires an uppercase letter')
-    .matches(/[^\w]/, 'Password requires a symbol'),*/
-  confirmPassword: Yup.string()
-    .oneOf([Yup.ref('password'), null], 'Must match "password" field value')
-    .required('Required'),
-});
+import FormSchema from '../validation/FormSchema';
 
 const InputsField = ({ id, setActive }) => {
   const dispatch = useDispatch();
-
-  /*let stateLocalUser = useSelector((state) => state.userLocal.storLocalUser);
-  console.log('stateLocalUser =', stateLocalUser);*/
-
-  const stateLocalUser = JSON.parse(localStorage.getItem('users')).data[id - 1];
-
-  /*if (!stateLocalUser) {
-    stateLocalUser = JSON.parse(localStorage.getItem('users')).data[id-1];
-    console.log("После перезагрузки", stateLocalUser)
-  }*/
+  const [stateLocalUser] = useState(
+    JSON.parse(localStorage.getItem('users')).data[id - 1]
+  );
 
   const initialValues = {
     id: id,
     email: stateLocalUser.email,
-    lastName: stateLocalUser.name,
+    name: stateLocalUser.name,
     phone: stateLocalUser.phone,
-    companyName: stateLocalUser.company.name,
-    specialization: stateLocalUser.company.catchPhrase,
-    tagline: stateLocalUser.company.bs,
-    website: stateLocalUser.website,
-    city: stateLocalUser.address.city,
-    street: stateLocalUser.address.street,
+    username: stateLocalUser.username,
+    company: {
+      catchPhrase: stateLocalUser.company.catchPhrase,
+      name: stateLocalUser.company.name,
+      bs: stateLocalUser.company.bs,
+    },
+    address: {
+      city: stateLocalUser.address.city,
+      street: stateLocalUser.address.street,
+      suite: stateLocalUser.address.suite,
+      zipcode: stateLocalUser.address.zipcode,
+      geo: {
+        lat: stateLocalUser.address.geo.lat,
+        lng: stateLocalUser.address.geo.lng,
+      }
+    },
+    website: stateLocalUser.website,    
     password: '',
     confirmPassword: '',
   };
@@ -58,17 +41,7 @@ const InputsField = ({ id, setActive }) => {
     <div>
       <Formik
         initialValues={initialValues}
-        validate={(values) => {
-          const errors = {};
-          if (!values.email) {
-            errors.email = 'Required';
-          } else if (
-            !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-          ) {
-            errors.email = 'Invalid email address';
-          }
-          return errors;
-        }}
+       
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
             setSubmitting(false);
@@ -85,9 +58,7 @@ const InputsField = ({ id, setActive }) => {
           touched,
           handleChange,
           handleBlur,
-          isValid,
           handleSubmit,
-          dirty,
           isSubmitting,
         }) => (
           <Form onSubmit={handleSubmit}>
@@ -106,10 +77,10 @@ const InputsField = ({ id, setActive }) => {
                 <Field
                   type="text"
                   id="lastName"
-                  name="lastName"
+                  name="name"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  value={values.lastName}
+                  value={values.name}
                   className="fild-input"
                 />
                 {errors.lastName && touched.lastName && (
@@ -198,22 +169,22 @@ const InputsField = ({ id, setActive }) => {
                 <br />
                 <Field
                   type="text"
-                  value={values.companyName}
-                  name="companyName"
+                  value={values.company.name}
+                  name="company.name"
                   id="companyName"
                   onBlur={handleBlur}
                   onChange={handleChange}
                   className="fild-input"
                 />
-                <label htmlFor={`specialization`} className="fild__lable">
+                <label htmlFor="catchPhrase" className="fild__lable">
                   Specialization
                 </label>
                 <br />
                 <Field
                   type="text"
-                  value={values.specialization}
-                  id="specialization"
-                  name="specialization"
+                  value={values.company.catchPhrase}
+                  id="catchPhrase"
+                  name="company.catchPhrase"
                   onBlur={handleBlur}
                   onChange={handleChange}
                   className="fild-input"
@@ -224,22 +195,22 @@ const InputsField = ({ id, setActive }) => {
                 <br />
                 <Field
                   type="text"
-                  value={values.tagline}
+                  value={values.company.bs}
                   id="tagline"
-                  name="tagline"
+                  name="company.bs"
                   onBlur={handleBlur}
                   onChange={handleChange}
                   className="fild-input"
                 />
-                <label htmlFor={`city`} className="fild__lable">
+                <label htmlFor="city" className="fild__lable">
                   City
                 </label>
                 <br />
                 <Field
                   type="text"
-                  value={values.city}
+                  value={values.address.city}
                   id="city"
-                  name="city"
+                  name="address.city"
                   onChange={handleChange}
                   className="fild-input"
                 />
@@ -249,10 +220,10 @@ const InputsField = ({ id, setActive }) => {
                 <br />
                 <Field
                   type="text"
-                  value={values.street}
+                  value={values.address.street}
                   id="street"
                   onBlur={handleBlur}
-                  name="street"
+                  name="address.street"
                   onChange={handleChange}
                   className="fild-input"
                 />

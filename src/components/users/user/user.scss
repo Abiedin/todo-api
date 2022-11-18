@@ -8,7 +8,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
+ 
 }
 
 .user__item {
@@ -63,4 +63,13 @@
   width: 200px;
   padding: 3px;
   cursor: pointer;
+}
+
+.information {
+  display: flex;
+  flex: content;
+}
+
+.information__extra {
+  width: 20%;
 }

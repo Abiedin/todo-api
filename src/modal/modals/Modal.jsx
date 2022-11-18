@@ -5,7 +5,6 @@ import { setChangeTodo } from '../../slices/todoSlice';
 
 const Modal = ({ active, setActive, TextField }) => {
   const dispatch = useDispatch();
-  //const todo = useSelector((state) => state.todo.chtodoTitle);
 
   return (
     <div

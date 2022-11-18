@@ -12,6 +12,14 @@ export const getUsers = createAsyncThunk(
       if (!response) {
         throw new Error('Can/t get users. Server error.');
       }
+
+      //const modifiedData =
+      response.data.map((item) => {
+        item.password = '';
+        return item;
+        //return {...item, pass:'', confPass: ''}
+      });
+
       localStorage.setItem('users', JSON.stringify(response));
       return response.data;
     } catch (error) {
@@ -38,19 +46,14 @@ const userSlice = createSlice({
     changeUserStorage: (state, action) => {
       const getLocalS = JSON.parse(localStorage.getItem('users'));
 
+      //const items = getLocalS.data.find((element) => element.id == action.payload.id)
+
       for (let i = 0; i < getLocalS.data.length; i++) {
         if (getLocalS.data[i].id == action.payload.id) {
-          getLocalS.data[i].name = action.payload.lastName;
-          getLocalS.data[i].email = action.payload.email;
-          getLocalS.data[i].phone = action.payload.phone;
-          getLocalS.data[i].company.name = action.payload.companyName;
-          getLocalS.data[i].company.catchPhrase = action.payload.specialization;
-          getLocalS.data[i].website = action.payload.website;
-          getLocalS.data[i].company.bs = action.payload.tagline;
-          getLocalS.data[i].address.city = action.payload.city;
-          getLocalS.data[i].address.street = action.payload.street;
 
-          state.storLocalUser = getLocalS.data[i];
+          getLocalS.data[i] = action.payload;
+
+          state.storLocalUser = action.payload;
         }
       }
       localStorage.setItem('users', JSON.stringify(getLocalS));
@@ -63,19 +66,17 @@ const userSlice = createSlice({
       state.storLocalUser = arr;
       state.userArr = arrA;
     },
-    allRemove: (state) => {
+    removeAll: (state) => {
       state.userArr = [];
       localStorage.clear();
     },
   },
   extraReducers: {
     [getUsers.pending]: (state) => {
-      console.log('getUsers: pending');
       state.status = 'loading';
       state.error = null;
     },
     [getUsers.fulfilled]: (state, action) => {
-      console.log('getUsers: fulfilled');
       state.status = 'fulfilled';
       state.userArr = action.payload;
     },
@@ -83,7 +84,7 @@ const userSlice = createSlice({
   },
 });
 
-export const { allRemove, alskdm, changeUserStorage, stateUser } =
+export const { removeAll, alskdm, changeUserStorage, stateUser } =
   userSlice.actions;
 
 export default userSlice.reducer;

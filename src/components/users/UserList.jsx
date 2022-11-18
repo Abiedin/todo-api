@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { allRemove, getUsers } from '../../slices/userSlice';
+import { removeAll, getUsers } from '../../slices/userSlice';
 import Buttons from '../../modal/buttons/Buttons';
 import './userlist.scss';
 import { stateUser } from '../../slices/userSlice';
@@ -14,12 +14,16 @@ export const UserList = () => {
     <>
       <h1 className="userlist-title">UserList</h1>
       <div className="userlist">
-        <Buttons getAll={getUsers} allRemove={allRemove} />
+        <Buttons getAll={getUsers} removeAll={removeAll} />
         <div className="userlist-item">
           <ul className="userlist-li">
             {users?.map((item) => (
-              <NavLink to={`/userlist/${item.id}`}>
-                <li key={item.id} onClick={() => dispatch(stateUser(item.id))}>
+              <NavLink to={`/userlist/${item.id}`} key={item.id}>
+                <li
+                  onClick={() => {
+                    dispatch(stateUser(item.id));
+                  }}
+                >
                   {item.name}
                 </li>
               </NavLink>

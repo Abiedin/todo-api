@@ -1,17 +1,17 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-import { v4 } from "uuid";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
+import { v4 } from 'uuid';
 
 export const getAll = createAsyncThunk(
-  "postN/getAll",
+  'postN/getAll',
   async (_, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        "https://jsonplaceholder.typicode.com/posts"
+        'https://jsonplaceholder.typicode.com/posts'
       );
 
       if (!response) {
-        throw new Error("Can/t delete post. Server error.");
+        throw new Error('Can/t delete post. Server error.');
       }
 
       console.log(response.data);
@@ -24,7 +24,7 @@ export const getAll = createAsyncThunk(
 );
 
 export const removePost = createAsyncThunk(
-  "postN/removePost",
+  'postN/removePost',
   async (id, { rejectWithValue, dispatch }) => {
     try {
       const response = await axios.delete(
@@ -32,7 +32,7 @@ export const removePost = createAsyncThunk(
       );
 
       if (!response) {
-        throw new Error("Can/t add post. Server error.");
+        throw new Error('Can/t add post. Server error.');
       }
       dispatch(deletePost(id));
     } catch (error) {
@@ -42,33 +42,32 @@ export const removePost = createAsyncThunk(
 );
 
 export const addNewPost = createAsyncThunk(
-  "postN/addNewPost",
+  'postN/addNewPost',
   async (text, { rejectWithValue, dispatch }) => {
     try {
-      if (text.length > 0){
+      if (text.length > 0) {
         const newTodo = {
           id: v4(),
           title: text,
           userId: 1,
-          body: "Loream ipson",
+          body: 'Loream ipson',
         };
-      
-      
-        console.log("text =", text);
-        console.log("newTodo =", newTodo);
+
+        console.log('text =', text);
+        console.log('newTodo =', newTodo);
         dispatch(adddPost(newTodo));
 
         const response = await axios.post(
-          "https://jsonplaceholder.typicode.com/posts",
+          'https://jsonplaceholder.typicode.com/posts',
           {
             headers: {
-              "Content-Type": "application/json",
+              'Content-Type': 'application/json',
             },
             body: JSON.stringify(newTodo),
           }
         );
         if (!response) {
-          throw new Error("Can/t add post. Server error.");
+          throw new Error('Can/t add post. Server error.');
         }
 
         /*const data = await response.json();
@@ -82,13 +81,13 @@ export const addNewPost = createAsyncThunk(
 );
 
 const setError = (state, action) => {
-  console.log("rejected");
-  state.status = "rejected";
+  console.log('rejected');
+  state.status = 'rejected';
   state.error = action.payload;
 };
 
 const postSlice = createSlice({
-  name: "postN",
+  name: 'postN',
   initialState: {
     postsArr: [],
   },
@@ -108,13 +107,13 @@ const postSlice = createSlice({
   extraReducers: {
     //rejectWithValue - с помощью нее имеем доступ к эти всем методам - fulfilled, pending, rejected
     [getAll.pending]: (state) => {
-      console.log("pending"); //метод вызывается тогда начинаю вызывать запрос фун-и getAll
-      state.status = "loading";
+      console.log('pending'); //метод вызывается тогда начинаю вызывать запрос фун-и getAll
+      state.status = 'loading';
       state.error = null;
     },
     [getAll.fulfilled]: (state, action) => {
-      console.log("fulfilled"); //метод вызывается тогда когда наш запрос прошел успешно
-      state.status = "fulfilled";
+      console.log('fulfilled'); //метод вызывается тогда когда наш запрос прошел успешно
+      state.status = 'fulfilled';
       state.postsArr = action.payload;
     },
     [getAll.rejected]: setError, //метод вызывается тогда когда есть какая-то ошибка
