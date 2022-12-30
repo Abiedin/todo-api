@@ -1,3 +1,9 @@
+:root {
+  --fontFamily: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  --fontSize: 20px;
+  --width: 100%;
+}
+
 .post-title {
   text-align: center;
   color: rgb(10, 163, 168);
@@ -5,11 +11,11 @@
 }
 
 .post-text {
-  width: 100%;
+  width:  var(--width);
   padding: 10px;
-  font-size: 20px;
+  font-size: var(--fontSize);
   margin-bottom: 10px;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-family: var(--fontFamily);
   color:rgb(43, 97, 104);
 }
 
@@ -29,13 +35,24 @@
 }
 
 .post-item {
-  width: 100%;
+  width:  var(--width);
   box-shadow: 2px 2px 5px 2px rgb(195, 206, 207);
   border-radius: 5px;
   padding: 10px;
-  font-size: 20px;
+  font-size: var(--fontSize);
   margin-bottom: 10px;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-family: var(--fontFamily);
   color:rgb(43, 97, 104);
   cursor: pointer;
+}
+
+.coins-pagination {
+  padding: 20px;
+  width:  var(--width);
+  display: flex;
+  justify-content: center;
+  
+  & .MuiPaginationItem-root {
+    color: blue;
+  }
 }

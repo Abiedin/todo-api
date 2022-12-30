@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux';
 import './buttons.scss';
 import { getUserAlboms, getUserTodos, getUserPosts } from '../../slices/user-etra/userExtraSlice';
 
-const Buttons = ({ getAll, removeAll }) => {
+const Buttons = ({ getAll, removeAll, setLoading }) => {
   const dispatch = useDispatch();
 
   return (
@@ -14,9 +14,10 @@ const Buttons = ({ getAll, removeAll }) => {
           dispatch(getUserAlboms());
           dispatch(getUserTodos());
           dispatch(getUserPosts());
+          setLoading(true)
         }}
       >
-        Get
+        Get API
       </button>
       <button className="btn-clear" onClick={() => dispatch(removeAll())}>
         Clear All

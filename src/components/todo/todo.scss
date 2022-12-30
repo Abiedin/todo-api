@@ -10,11 +10,7 @@
 }
 
 .todo-ul{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 10px;
-  padding: 10px;
+ margin-top: 20px;
 }
 
 .textli {
@@ -88,4 +84,14 @@
   justify-content: space-around;
   margin: 40px 0 0 0;
   text-align: center;
+}
+
+.coins-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.coins-pagination-non {
+  display: none;
 }

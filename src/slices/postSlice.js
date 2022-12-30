@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 import { v4 } from 'uuid';
 
 export const getAll = createAsyncThunk(
@@ -56,23 +57,6 @@ export const addNewPost = createAsyncThunk(
         console.log('text =', text);
         console.log('newTodo =', newTodo);
         dispatch(adddPost(newTodo));
-
-        const response = await axios.post(
-          'https://jsonplaceholder.typicode.com/posts',
-          {
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(newTodo),
-          }
-        );
-        if (!response) {
-          throw new Error('Can/t add post. Server error.');
-        }
-
-        /*const data = await response.json();
-        console.log("data =", data);
-        dispatch(adddPost(data));*/
       }
     } catch (error) {
       return rejectWithValue(error.message);
@@ -98,7 +82,7 @@ const postSlice = createSlice({
       );
     },
     adddPost: (state, action) => {
-      state.postsArr.push(action.payload);
+      state.postsArr.unshift(action.payload);
     },
     allRemove: (state) => {
       state.postsArr = [];
@@ -114,7 +98,7 @@ const postSlice = createSlice({
     [getAll.fulfilled]: (state, action) => {
       console.log('fulfilled'); //метод вызывается тогда когда наш запрос прошел успешно
       state.status = 'fulfilled';
-      state.postsArr = action.payload;
+      state.postsArr = action.payload
     },
     [getAll.rejected]: setError, //метод вызывается тогда когда есть какая-то ошибка
     //теперь есть доступ в функции getAll в любом месте приложения

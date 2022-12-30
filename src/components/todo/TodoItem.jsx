@@ -11,7 +11,7 @@ const TodoItem = ({ todo, setModalActive }) => {
   return (
     <>
       {
-        <li
+        <div
           className={todo.completed ? 'todo-li done' : 'todo-li'}
           key={todo.id}
         >
@@ -42,7 +42,7 @@ const TodoItem = ({ todo, setModalActive }) => {
               }}
             />
           </div>
-        </li>
+        </div>
       }
     </>
   );

@@ -1,27 +1,40 @@
-.todobtncl {
-  margin: 40px 0 0 0;
-  text-align: center;
-}
-
-.btn-gettodo {
+%tpl {
   outline: none;
-  background-color: rgb(195, 231, 195);
-  border: 2px solid rgb(69, 160, 84);
   font-size: 18px;
   border-radius: 5px;
   width: 200px;
   padding: 3px;
   color: rgb(102, 168, 41);
   cursor: pointer;
+  transition: 0.3s;
+}
+
+%btnHover {
+  background-color: rgb(225, 248, 225);
+  border: none;
+  color: rgb(218, 235, 67);
+}
+
+.todobtncl {
+  margin: 40px 0 0 0;
+  text-align: center;
+}
+
+.btn-gettodo {
+  @extend %tpl;
+  background-color: rgb(195, 231, 195);
+  border: 1px solid rgb(69, 160, 84);
+  
+  &:hover {
+    @extend %btnHover;
+  }
 }
 
 .btn-clear {
-  outline: none;
-  background-color: #fff;
-  border: 2px solid rgb(11, 133, 182);
-  font-size: 18px;
-  border-radius: 5px;
-  width: 200px;
-  padding: 3px;
-  cursor: pointer;
+  @extend %tpl;
+  border: 1px solid rgb(11, 133, 182);
+
+  &:hover {
+    @extend %btnHover;
+  }
 }

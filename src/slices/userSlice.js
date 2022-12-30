@@ -53,7 +53,7 @@ const userSlice = createSlice({
 
           getLocalS.data[i] = action.payload;
 
-          state.storLocalUser = action.payload;
+          state.storLocalUser = getLocalS.data[i];
         }
       }
       localStorage.setItem('users', JSON.stringify(getLocalS));
